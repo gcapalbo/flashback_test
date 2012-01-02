@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Send Message</title>
+    </head>
+    <body>
+        <h1 style="border-bottom: 1px solid #000;">Send Message</h1>
+        <br />
+        <form action="." method="POST">
+            {% csrf_token %}
+            <table style="border: 1px solid #000; text-align: right;">
+                {{ form }}
+            </table>
+            <div>
+                <input type="submit" value="Send" />
+            </div>
+        </form>
+    </body>
+</html>
