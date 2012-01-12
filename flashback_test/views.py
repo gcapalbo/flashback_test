@@ -36,7 +36,7 @@ def tropo_view(request):
                 msg = session["initialText"]
             log("IN", channel, caller_id, "TROPO", request.raw_post_data, msg)
             if channel == "VOICE":
-                send_sms(caller_id, "Callback received.")
+                send_sms_tropo(caller_id, "Callback received.")
         t = Tropo()
         t.hangup()
         return HttpResponse(t.RenderJson())
@@ -57,6 +57,8 @@ def twilio_view(request):
         r = twiml.Response()
         r.reject()
         log("IN", "VOICE", caller_id, "TWILIO", request.raw_post_data)
+        if caller_id is not None:
+            send_sms_twilio(caller_id, "Callback received.")
         return HttpResponse(str(r))
     else:
         return HttpResponseBadRequest()
